@@ -1,4 +1,11 @@
-import { useContext, ReactNode, createContext, useState } from "react";
+import { Props } from "next/script";
+import {
+  useContext,
+  ReactNode,
+  createContext,
+  useState,
+  PropsWithChildren,
+} from "react";
 import { ShoppingCart } from "../components/ShoppingCart";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 
@@ -32,15 +39,15 @@ export function useShoppingCart() {
 }
 
 // Provider allows consuming components to subscribe to context changes, all descendant consumers will re-render whenever the provider's value prop changes
-export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
+export function ShoppingCartProvider({ children }: PropsWithChildren) {
   // useState will take the types of CartItem[]
-  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  // const [cartItems, setCartItems] = useState<CartItem[]>([]);
 
   // UseLocalStorage will take the types of CartItem[]
-  /*const [cartItems, setCartItems] = useLocalStorage<CartItem[]>(
+  const [cartItems, setCartItems] = useLocalStorage<CartItem[]>(
     "shopping-cart",
     []
-  );*/
+  );
 
   const [isOpen, setIsOpen] = useState(false);
 
